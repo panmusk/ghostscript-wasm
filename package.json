@@ -1,0 +1,28 @@
+{
+  "name": "@zfanta/ghostscript-wasm",
+  "version": "0.0.1",
+  "main": "dist/gs.js",
+  "files": [
+    "dist",
+    "gs.d.ts"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "prepare": "npm run build"
+  },
+  "author": "",
+  "license": "agpl-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zfanta/ghostscript-wasm.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "types": "gs.d.ts",
+  "devDependencies": {
+    "@types/emscripten": "^1.39.7",
+    "docker-cli-js": "^2.10.0"
+  }
+}
