@@ -40,6 +40,7 @@ ENV GS_LDFLAGS="\
     -lnodefs.js -lworkerfs.js \
     --closure 1 \
     --pre-js "./js/pre.js" \
+    --post-js "./js/post.js" \
     -s WASM_BIGINT=1 \
     -s ALLOW_MEMORY_GROWTH=1 \
     -s EXPORTED_RUNTIME_METHODS='[\"callMain\",\"FS\",\"NODEFS\",\"WORKERFS\",\"ENV\"]' \
