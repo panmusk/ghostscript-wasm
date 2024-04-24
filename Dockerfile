@@ -6,13 +6,14 @@ RUN apt update && \
 ENV OUT_DIR=/out
 ENV ROOT=/src
 
-ENV VERSION=10.02.0
+ENV VERSION=10.03.0
+ENV VERSION_NODOTS=10030
 ENV DIRECTORY=ghostscript-${VERSION}
 
 WORKDIR /src
 
 COPY arch_wasm.h .
-ADD https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10020/${DIRECTORY}.tar.gz .
+ADD https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${VERSION_NODOTS}/${DIRECTORY}.tar.gz .
 RUN tar -xzf ${DIRECTORY}.tar.gz
 
 WORKDIR /src/${DIRECTORY}
@@ -37,13 +38,13 @@ RUN emconfigure ./autogen.sh \
 COPY js ./js
 
 ENV GS_LDFLAGS="\
-    -lnodefs.js -lworkerfs.js \
+    -lnodefs.js -lworkerfs.js -lidbfs.js\
     --closure 1 \
     --pre-js "./js/pre.js" \
     --post-js "./js/post.js" \
     -s WASM_BIGINT=1 \
     -s ALLOW_MEMORY_GROWTH=1 \
-    -s EXPORTED_RUNTIME_METHODS='[\"callMain\",\"FS\",\"NODEFS\",\"WORKERFS\",\"ENV\"]' \
+    -s EXPORTED_RUNTIME_METHODS='[\"callMain\",\"FS\",\"NODEFS\",\"WORKERFS\",\"ENV\",\"IDBFS\"]' \
     -s INCOMING_MODULE_JS_API='[\"noInitialRun\",\"noFSInit\",\"locateFile\",\"preRun\",\"instantiateWasm\"]' \
     -s NO_DISABLE_EXCEPTION_CATCHING=1 \
     -s MODULARIZE=1 \
